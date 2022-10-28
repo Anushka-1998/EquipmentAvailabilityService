@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RouteServiceApplication {
+public class EquipmentAvailabilityApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RouteServiceApplication.class, args);
+		SpringApplication.run(EquipmentAvailabilityApplication.class, args);
 	}
 
 }

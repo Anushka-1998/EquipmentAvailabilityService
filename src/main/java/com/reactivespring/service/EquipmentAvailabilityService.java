@@ -9,19 +9,31 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Service
-public class RouteInfoService {
+public class EquipmentAvailabilityService {
+
     @Autowired
     private ContainerInfoRepository containerInfoRepository;
 
+    /**
+     * @param containerDTO
+     * @return
+     */
+
     public Mono<ContainerDTO> addContainerInfo(ContainerDTO containerDTO) {
-        log.info("Recieved containerDTO Object :{}", containerDTO);
+        log.info("Saving containerDTO Object :{} to the database", containerDTO);
         return containerInfoRepository.save(containerDTO).log();
     }
 
+    /**
+     *
+     * @param source
+     * @param containerType
+     * @return
+     */
+
     public Mono<Double> getNoOfContainersBySourceAndContainerType(String source, String containerType) {
-        log.info("At Service :Received Container  Request for {}:{}", source, containerType);
+        log.info("Get noOfContainer from database based on source : {} | containerType : {}", source, containerType);
         Mono<ContainerDTO> containerDTO = containerInfoRepository.findNoOfContainersBySourceAndContainerType(source,containerType);
-        //return containerDTO.getNoOfContainers();
         return  containerDTO.flatMap(e-> Mono.just(e.getNoOfContainers()));
     }
 }
